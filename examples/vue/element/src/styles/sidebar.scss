@@ -1,0 +1,50 @@
+.app-wrapper {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  &.open {
+    .app-sidebar {
+      flex: 0 0 64px;
+    }
+  }
+  .app-sidebar {
+    height: 100vh;
+    flex: 0 0 180px;
+    overflow: hidden;
+    transition: all .2s ease;
+  }
+  .main-container {
+    flex: 1;
+    height: 100vh;
+    transition: all .2s ease;
+    overflow: hidden;
+    .main-header {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 16px;
+      height: 48px;
+      line-height: 48px;
+      border-bottom: 1px #333 dashed;
+      .trigger_icon {
+        font-size: 24px;
+        transition: all .2s ease;
+        cursor: pointer;
+        &:hover {
+          color: #0ae;
+        }
+      }
+    }
+    .main-content {
+      height: calc(100% - 100px);
+      overflow: auto;
+    }
+    .main-footer {
+      height: 48px;
+      line-height: 48px;
+      text-align: center;
+      font-size: 14px;
+      color: gray;
+      box-shadow: 0 -1px #ccc, 0 -2px #0ae;
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "name": "koa-demo",
+  "version": "1.0.0",
+  "description": "learn koa demo",
+  "main": "index.js",
+  "scripts": {
+    "demo1": "nodemon demo1/index.js",
+    "demo2": "nodemon demo2/index.js",
+    "koa-router": "nodemon koa-router/index.js",
+    "get": "nodemon get/index.js",
+    "post": "nodemon post/index.js",
+    "bodyparser": "nodemon koa-bodyparser/index.js",
+    "native-static": "nodemon koa-static/native.js",
+    "static": "nodemon koa-static/index.js",
+    "cookie": "nodemon cookie/index.js",
+    "session": "nodemon session/index.js",
+    "template": "nodemon template/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niexiaofei1988/koa-demo.git"
+  },
+  "author": "NHF",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/niexiaofei1988/koa-demo/issues"
+  },
+  "homepage": "https://github.com/niexiaofei1988/koa-demo#readme",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "ejs": "^2.6.1",
+    "koa-bodyparser": "^4.2.1",
+    "koa-mysql-session": "^0.0.2",
+    "koa-router": "^7.4.0",
+    "koa-session-minimal": "^3.0.4",
+    "koa-static": "^4.0.3",
+    "koa-views": "^6.1.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.5"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "test/*",
+      "docs/*"
+    ],
+    "delay": "2500"
+  }
+}

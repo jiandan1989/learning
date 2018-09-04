@@ -1,0 +1,56 @@
+#root,
+.App,
+.app-warpper {
+  height: 100vh;
+  background: transparent;
+  overflow: hidden;
+  .sider_warpper {
+    .sider_menu {
+      height: calc(~'100vh - 50px');
+      overflow-y: auto;
+    }
+    .switch_theme {
+      display: flex;
+      justify-content: center;
+      height: 48px;
+      padding-top: 14px;
+      box-shadow: 0 -1px 0 #ccc, 0 -1px 0 #ccc;
+      color: #fff;
+    }
+  }
+  .layout_content {
+    height: 100vh;
+    overflow: hidden;
+    .content_header {
+      background: #fff;
+      padding-left: 16px;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px #333 dashed;
+      box-shadow: 0 1px 1px #333;
+    }
+    .content_wrapper {
+      height: calc(~'100vh - 64px');
+      overflow-y: auto;
+      background-color: #f0f2f5;
+      padding: 24px;
+      box-shadow: 1px 1px 1px #fff, -1px -1px 1px #fff;
+      border-radius: 8px;
+    }
+  }
+}
+
+@keyframes back-top {
+  25% {
+    top: 5px;
+  }
+  50% {
+    top: 10px;
+  }
+  75% {
+    top: 5px;
+  }
+  100% {
+    top: 10px;
+  }
+}

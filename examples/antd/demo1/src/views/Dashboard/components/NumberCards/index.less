@@ -1,0 +1,39 @@
+.number_card {
+  padding: 16px;
+  margin-bottom: 8px;
+  white-space: nowrap;
+  transition: all .2s linear;
+  cursor: pointer;
+
+  :hover {
+    transform: translateY(10px);
+  }
+
+  &.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
+  
+  .icon_warpper {
+    float: left;
+    font-size: 54px;
+  }
+
+  .content {
+    width: calc(100% - 54px);
+    float: left;
+    font-size: 24px;
+
+    .content_title {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 16px;
+      font-weight: bold;
+    }
+  }
+}
