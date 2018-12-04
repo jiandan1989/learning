@@ -6,6 +6,6 @@
 
 import userRouter from './userRouter';
 
-export default app => {
-  app.use(userRouter.routes()).use(userRouter.allowedMethods())
-}
+export default (app) => {
+  app.use(userRouter.routes()).use(userRouter.allowedMethods());
+};

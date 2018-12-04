@@ -10,17 +10,18 @@
  */
 
 import mongoose from 'mongoose';
-const Schema = mongoose.Schema;
 
-var user = new Schema({
+const { Schema } = mongoose;
+
+const user = new Schema({
   id: Number,
   create_time: String,
   password: String,
   username: String,
   avatar: {
     type: String,
-    default: 'default.jpg'
+    default: 'default.jpg',
   },
-})
+});
 
 export default mongoose.model('user', user);

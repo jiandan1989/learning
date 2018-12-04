@@ -1,15 +1,13 @@
 import UserModel from '../../models/userModel';
+
 class User extends UserModel {
-  constructor() {
-    super();
-  }
   login = async (ctx) => {
     console.log(ctx.response);
     ctx.body = {
       data: {
         success: true,
       },
-      success: true
+      success: true,
     };
     return await ctx;
   };
@@ -18,8 +16,8 @@ class User extends UserModel {
       data: {
         method: ctx.method,
       },
-      success: true
-    }
+      success: true,
+    };
     return await ctx;
   }
 }

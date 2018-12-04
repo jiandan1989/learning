@@ -4,18 +4,11 @@
  * @description: 启动入口
  */
 
-import router from './routers' // router
-import db from './mongodb/db';
-
-
 import chalk from 'chalk';
-import {
-  app
-} from './app';
+import router from './routers'; // router
+import { app } from './app';
 
-import {
-  getIp
-} from './util';
+import { getIp } from './util';
 import config from './config/config'; // 默认端口号
 
 router(app);
