@@ -1,3 +1,6 @@
+// const PostCompilePlugin = require('webpack-post-compile-plugin');
+const TransformModulesPlugin = require('webpack-transform-modules-plugin');
+
 // vue.config.js
 module.exports = {
   // 服务配置
@@ -11,11 +14,14 @@ module.exports = {
     resolve: {
       // extensions: ['.vue'],
       alias: { // 指定别名
+        'cube-ui': 'cube-ui/lib',
         views: '@/views/',
         components: '@/components/',
       },
     },
-    plugins: [],
+    plugins: [
+      new TransformModulesPlugin(),
+    ],
   },
   // chainWebpack: config => {
   //   config.module.rule('vue')

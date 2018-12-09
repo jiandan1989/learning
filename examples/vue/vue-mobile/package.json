@@ -10,10 +10,26 @@
       "pre-commit": "lint-staged"
     }
   },
+  "transformModules": {
+    "cube-ui": {
+      "transform": "cube-ui/lib/${member}",
+      "kebabCase": true,
+      "style": {
+        "ignore": [
+          "create-api",
+          "better-scroll",
+          "locale"
+        ]
+      }
+    }
+  },
   "dependencies": {
+    "cube-ui": "^1.12.6",
     "fastclick": "^1.0.6",
     "lib-flexible": "^0.3.2",
+    "nprogress": "^0.2.0",
     "vue": "^2.5.17",
+    "vue-meta": "^1.5.6",
     "vue-router": "^3.0.2"
   },
   "devDependencies": {
@@ -26,6 +42,10 @@
     "eslint-plugin-vue": "^5.0.0-0",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
-    "vue-template-compiler": "^2.5.17"
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
+    "vue-template-compiler": "^2.5.17",
+    "webpack-post-compile-plugin": "^1.0.0",
+    "webpack-transform-modules-plugin": "^0.4.3"
   }
 }
