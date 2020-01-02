@@ -1,0 +1,81 @@
+:root {
+  --h1: 1.3;
+  --h2: 1.25;
+  --h3: 1.2;
+  --h4: 1.15;
+  --h5: 1.1;
+  --h6: 1;
+  --base-size: 1rem;
+  --hover-color: #0ae;
+}
+
+/* base */
+body {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+ul,
+ul > li {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* vue.css */
+.content {
+  padding-top: 32px;
+}
+
+.markdown-section {
+  padding: 24px 32px;
+}
+
+.markdown-section h2 {
+  font-size: calc(var(--h2) * var(--base-size));
+  margin: calc(var(--h2) * var(--base-size)) 0 0.8rem;
+}
+
+.markdown-section h3 {
+  font-size: calc(var(--h3) * var(--base-size));
+  margin: calc(var(--h3) * var(--base-size)) 0 0.6rem;
+}
+
+.markdown-section h4 {
+  font-size: calc(var(--h4) * var(--base-size));
+  margin: calc(var(--h4) * var(--base-size));
+}
+
+.markdown-section h5 {
+  font-size: calc(var(--h5) * var(--base-size));
+  margin: calc(var(--h5) * var(--base-size)) 0 0.1rem;
+}
+
+.markdown-section blockquote {
+  font-size: 13px;
+  margin: 0.618em 0;
+}
+
+.markdown-section blockquote p {
+  margin: 0;
+}
+
+.markdown-section pre {
+  line-height: 1.3rem;
+}
+
+.markdown-section pre > code {
+  padding: 1.1em 5px;
+}
+
+.sidebar ul li a {
+  font-size: 12px;
+}
+
+.sidebar ul li a:hover {
+  color: var(--hover-color);
+}
+
+/* copy button */
+.docsify-copy-code-button {
+  border-radius: 0.3em !important;
+}

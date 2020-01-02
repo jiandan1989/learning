@@ -2,7 +2,7 @@
 
 ### 安装
 
-```vim
+```bash
 npm i element-ui -S
 ```
 
@@ -26,11 +26,13 @@ new Vue({
 
 > 安装插件: [babel-plugin-component](https://github.com/ElementUI/babel-plugin-component)
 
-> `npm install babel-plugin-component babel-preset-es2015 -D`
+```bash
+npm install babel-plugin-component babel-preset-es2015 -D
+```
 
 ### 修改 `.babelrc`
 
-```vim
+```json
 {
   "presets": [["es2015", { "modules": false }]],
   "plugins": [
@@ -49,7 +51,6 @@ new Vue({
 
 ```javascript
 // 修改 main.js
-
 import Vue from "vue";
 import { Button, Select } from "element-ui";
 import App from "./App.vue";

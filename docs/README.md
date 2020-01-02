@@ -1,3 +1,3 @@
-# Headline
+# 学习汇总
 
-> An awesome project.
+> 日复一日, 年复一年
