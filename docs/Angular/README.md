@@ -1,5 +1,3 @@
-## Angular 学习记录
-
 ### 指令绑定
 
 - `ng-repeat` 中动态绑定 id, `id = "{{$index}}"`,默认将 `$index`注入, `ng-init`自定义变量的值

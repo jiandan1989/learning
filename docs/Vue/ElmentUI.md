@@ -9,15 +9,15 @@ npm i element-ui -S
 ### 完整引入
 
 ```javascript
-import Vue from 'vue';
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
-import App from './App.vue';
+import Vue from "vue";
+import ElementUI from "element-ui";
+import "element-ui/lib/theme-chalk/index.css";
+import App from "./App.vue";
 
 Vue.use(ElementUI);
 
 new Vue({
-  el: '#app',
+  el: "#app",
   render: h => h(App)
 });
 ```
@@ -50,9 +50,9 @@ new Vue({
 ```javascript
 // 修改 main.js
 
-import Vue from 'vue';
-import { Button, Select } from 'element-ui';
-import App from './App.vue';
+import Vue from "vue";
+import { Button, Select } from "element-ui";
+import App from "./App.vue";
 
 Vue.component(Button.name, Button);
 Vue.component(Select.name, Select);
@@ -62,7 +62,7 @@ Vue.component(Select.name, Select);
  */
 
 new Vue({
-  el: '#app',
+  el: "#app",
   render: h => h(App)
 });
 ```
