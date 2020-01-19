@@ -8,6 +8,11 @@
   --base-size: 1rem;
   --hover-color: #0ae;
 }
+/* color */
+
+:root {
+  --theme-color: #0ae;
+}
 
 /* base */
 body {
@@ -28,6 +33,11 @@ ul > li {
 
 .markdown-section {
   padding: 24px 32px;
+}
+
+.markdown-section a {
+  color: #0ae;
+  font-weight: 800;
 }
 
 .markdown-section h2 {
