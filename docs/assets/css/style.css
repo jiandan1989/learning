@@ -62,11 +62,17 @@ ul > li {
 
 .markdown-section blockquote {
   font-size: 13px;
+  border-left-width: 2px;
+  padding-left: 12px;
   margin: 0.618em 0;
+  background-color: floralwhite;
+  /* text-indent: 2em; */
 }
 
 .markdown-section blockquote p {
   margin: 0;
+  font-size: 11px;
+  font-weight: 400;
 }
 
 .markdown-section pre {
