@@ -30,7 +30,8 @@
   - [Wechat](Wechat/ "微信小程序")
     - [wepy](Wechat/wepy "微信小程序")
 
-- 其他工具
+- 其他
+  - [Github Page](Other/github/page "使用Github Page 搭建自己的静态站点")
   - [Mac Tree](Other/tree "Tree 生成项目目录")
 
 - 图表可视化

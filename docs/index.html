@@ -11,7 +11,7 @@
     content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
   <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
+  <!-- <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css"> -->
   <!-- Theme: Simple Dark -->
   <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css"> -->
   <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css"> -->
@@ -20,7 +20,7 @@
 
 <body>
   <div id="app" data-app>Please wait...</div>
-  <div id="gitalk-container"></div>
+  <!-- <div id="gitalk-container"></div> -->
   <script>
     window.$docsify = {
       name: '学习汇总',
@@ -33,6 +33,7 @@
       themeColor: '#ff9800',
       subMaxLevel: 3,
       auto2top: true,
+      ga: 'UA-156595897-1',
       search: {
         maxAge: 86400000,
         paths: 'auto',
@@ -51,9 +52,12 @@
   <script src="//unpkg.com/prismjs/components/prism-tsx.min.js"></script>
   <script src="//unpkg.com/prismjs/components/prism-bash.min.js"></script>
   <script src="//unpkg.com/prismjs/components/prism-vim.min.js"></script>
-  <script src="//unpkg.com/docsify/lib/plugins/gitalk.min.js"></script>
-  <script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
-  <script>
+  <script src="//unpkg.com/docsify/lib/plugins/zoom-image.min.js"></script>
+  <script src="//unpkg.com/docsify/lib/plugins/emoji.min.js"></script>
+  <!-- <script src="//unpkg.com/docsify/lib/plugins/gitalk.min.js"></script>
+  <script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script> -->
+  <!-- <script src="//unpkg.com/docsify/lib/plugins/ga.js"></script> -->
+  <!-- <script>
     const gitalk = new Gitalk({
       clientID: '0008ae00eab086a888d8',
       clientSecret: '064baa9d60cc90b03a7781865253bc1891450b3a',
@@ -62,8 +66,9 @@
       admin: 'niexiaofei1988',
       // distractionFreeMode: true
     });
-    gitalk.render('gitalk-container');
-  </script>
+
+    // gitalk.render('gitalk-container');
+  </script> -->
 </body>
 
 </html>
