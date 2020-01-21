@@ -4,7 +4,7 @@
 
 ### 书籍
 
-- [free-books](https://github.com/ruanyf/free-books)
+- [free-books](https://github.com/ruanyf/free-books): 免费书籍搜集
 - [frontend-dev-bookmarks](https://github.com/dypsilon/frontend-dev-bookmarks): 前端 Web 开发人员资源收集
 - [the-book-of-secret-knowledge](https://github.com/trimstray/the-book-of-secret-knowledge): 比较经典的手册,速查表, 博客, 黑客单行代码, cli/web 工具等的集合
 - [free-programming-books](https://github.com/EbookFoundation/free-programming-books): 免费的计算机相关书籍列表

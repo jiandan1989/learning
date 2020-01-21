@@ -274,6 +274,85 @@ module.exports = InterceptorManager;
 
 从以上代码中不难看出, 都继承了 `InterceptorManager`构造函数, 在初始化实例的时候每个实例上都绑定了一个属性 拦截器的数组`handlers`, 而调用 `use`方法之后其实就是在拦截器数组中添加了一个`Promise`的拦截器, 接收两个参数 `fulfilled` 和 `rejected`处理函数 分别对应 `Promise`中的 `onSuccess` 和 `onFail`的回调, 并且返回一个用于删除拦截器的`ID`
 
+### cancel
+
+```ts
+"use strict";
+function Cancel(message) {
+  this.message = message;
+}
+
+Cancel.prototype.toString = function toString() {
+  return "Cancel" + (this.message ? ": " + this.message : "");
+};
+
+// 维护一个原型属性, 由于后续判断是否已经取消请求, 比如 isCancel
+Cancel.prototype.__CANCEL__ = true;
+
+module.exports = Cancel;
+```
+
+#### isCancel
+
+> 判断请求是否已经取消
+
+```ts
+function isCancel(value) {
+  return !!(value && value.__CANCEL__);
+}
+```
+
+### defaults
+
+> 这些所有的配置都会添加到创建的实例中去, 可以通过 `instance.defaults`进行获取
+
+- 包含了 [adapter](#adapter)获取, 判断是客户端或者服务端 加载对应的适配文件, [客户端](#client)
+- 包含有 [transformRequest](#transformRequest)允许在请求前对数据进行格式转换
+- 校验状态[validateStatus](#validateStatus)
+- 默认 [ContentType](#ContentType)
+
+#### transformRequest
+
+> 在触发请求前对数据进行数据格式转换, 但最后的一个函数必须返回一个 `string` 或者一个 `Buffer` / `ArrayBuffer` / `FormData` / `Stream`的实例, 且只适合用于 `PUT', 'POST', 'PATCH' 和 'DELETE` 请求方法
+
+```ts
+transformRequest: [function transformRequest(data, headers) {
+    normalizeHeaderName(headers, 'Accept');
+    normalizeHeaderName(headers, 'Content-Type');
+    if (utils.isFormData(data) ||
+      utils.isArrayBuffer(data) ||
+      utils.isBuffer(data) ||
+      utils.isStream(data) ||
+      utils.isFile(data) ||
+      utils.isBlob(data)
+    ) {
+      return data;
+    }
+    if (utils.isArrayBufferView(data)) {
+      return data.buffer;
+    }
+    if (utils.isURLSearchParams(data)) {
+      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
+      return data.toString();
+    }
+    if (utils.isObject(data)) {
+      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
+      return JSON.stringify(data);
+    }
+    return data;
+  }],
+```
+
+#### validateStatus
+
+> 查看返回状态码是否成功 `boolean`
+
+```ts
+validateStatus: function validateStatus(status) {
+  return status >= 200 && status < 300;
+}
+```
+
 ### adapter
 
 > 在触发请求前需要判断下是在`客户端` 或者是 `服务端`进行使用, 进行处理
@@ -295,17 +374,139 @@ function getDefaultAdapter() {
 }
 ```
 
+#### ContentType
+
+```ts
+utils.forEach(["delete", "get", "head"], function forEachMethodNoData(method) {
+  defaults.headers[method] = {};
+});
+
+// 循环对 post put patch 方法添加默认 'Content-Type': 'application/x-www-form-urlencoded'
+utils.forEach(["post", "put", "patch"], function forEachMethodWithData(method) {
+  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
+});
+```
+
+### client
+
+- 客户端使用原生 `XMLHttpRequest` 方法实现
+
+> 查看请求中携带的 `Content-Type`是否为`Form`表单提交形式
+
+```ts
+if (utils.isFormData(requestData)) {
+  delete requestHeaders["Content-Type"];
+}
+```
+
+#### HTTP 基础认证
+
+- 利用[btoa](https://developer.mozilla.org/zh-CN/docs/Web/API/WindowBase64/btoa)转换为 `base64` 实现基础的 `HTTP认证方案`, 尽管是采用了 `base64` 但是可以通过使用[atob](https://developer.mozilla.org/zh-CN/docs/Web/API/WindowBase64/atob)进行逆转的, 所以就是一个明文传输,并不是很安全, 其他[更多认证方案](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Authentication)
+
+```ts
+if (config.auth) {
+  var username = config.auth.username || "";
+  var password = config.auth.password || "";
+  requestHeaders.Authorization = "Basic " + btoa(username + ":" + password);
+}
+```
+
+#### 响应数据基础处理
+
+```ts
+var responseData =
+  !config.responseType || config.responseType === "text"
+    ? request.responseText
+    : request.response;
+
+// 响应返回数据格式, 平时只需要使用 data 和 status 就可以了
+var response = {
+  data: responseData,
+  status: request.status,
+  statusText: request.statusText,
+  headers: responseHeaders,
+  config: config,
+  request: request
+};
+```
+
+#### 携带 cookie 凭证
+
+> 根据 [withCredentials](https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest/withCredentials)进行设置, 及配合设置 `xsrfCookieName` 和 `xsrfHeaderName`, 或者同域, 但不支持 `react-native`
+
+```ts
+if (utils.isStandardBrowserEnv()) {
+  var cookies = require("./../helpers/cookies");
+
+  // Add xsrf header
+  var xsrfValue =
+    (config.withCredentials || isURLSameOrigin(fullPath)) &&
+    config.xsrfCookieName
+      ? cookies.read(config.xsrfCookieName)
+      : undefined;
+
+  if (xsrfValue) {
+    requestHeaders[config.xsrfHeaderName] = xsrfValue;
+  }
+}
+```
+
+#### onDownloadProgress
+
+> 提供下载进度监听, 利用 `XMLHttpRequest`实例化的 `progress`事件处理
+
+```ts
+if (typeof config.onDownloadProgress === "function") {
+  request.addEventListener("progress", config.onDownloadProgress);
+}
+```
+
+#### onUploadProgress
+
+> 监听上传事件, 但并不是所有的浏览器都支持上传事件
+
+```ts
+if (typeof config.onUploadProgress === "function" && request.upload) {
+  request.upload.addEventListener("progress", config.onUploadProgress);
+}
+```
+
+#### timeoutErrorMessage
+
+> 设置超时提示信息
+
+```ts
+request.ontimeout = function handleTimeout() {
+  var timeoutErrorMessage = "timeout of " + config.timeout + "ms exceeded";
+  if (config.timeoutErrorMessage) {
+    timeoutErrorMessage = config.timeoutErrorMessage;
+  }
+  reject(createError(timeoutErrorMessage, config, "ECONNABORTED", request));
+
+  // Clean up request
+  request = null;
+};
+```
+
+> 部分配置项没有显示在 `README`文档中, 需要进行尝试后才能够确定
+
+<!-- > 综上可以大概总结下支持的内容
+
+- 上传 / 下载进度事件
+- cookie 设置
+- responseType: 设置返回类型
+- withCredentials: 携带令牌
+- 取消请求 -->
+
+### Node
+
+> Node 端主要使用内置的 `Http` 和 `https`进行实现, 咱不看, 后续重新查看 `node`时再来补充 `todo`
+
 ### dispatchRequest
 
 > 接上句, 但是在触发请求前还是需要做一些事情, 比如[适配器层处理](#adapter), 判断[是否取消请求](#cancel), 在上边最开始`lib/axios`导出文件中已经说明, 最终其实是继承了[Axios.prototype.request](#request)的实例, 而创建实例时有一个[defaults](#defaults)对象
 
-### cancel
-
-@todo
-
-### defaults
-
-默认值设置 `todo`
+------------ 未完待续 -------------
 
 ### 工具
 
@@ -389,6 +590,11 @@ function extend(a, b, thisArg) {
   return a;
 }
 ```
+
+`TODO`
+
+- cookie 读 / 写
+- xss
 
 ### 参考
 
