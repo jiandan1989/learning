@@ -57,12 +57,12 @@
     const gitalk = new Gitalk({
       clientID: '0008ae00eab086a888d8',
       clientSecret: '064baa9d60cc90b03a7781865253bc1891450b3a',
-      repo: 'https://github.com/niexiaofei1988/learning.git',
+      repo: 'learning',
       owner: 'niexiaofei1988',
-      admin: ['Github repo collaborators, only these guys can initialize github issues'],
-      // facebook-like distraction free mode
-      distractionFreeMode: true
-    })
+      admin: 'niexiaofei1988',
+      // distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
   </script>
 </body>
 
