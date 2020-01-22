@@ -5,10 +5,9 @@
 接下来尝试创建一个电影的增删改查操作
 
 ```bash
+mkdir movies & cd movies
 npm init -y
-
 npm install -S express body-parser multer
-
 npm install -D nodemon chalk ts-node
 ```
 
@@ -127,6 +126,33 @@ MovieRouter.delete("/:id", (req, res) => {
 export default MovieRouter;
 ```
 
+> 路由已经开发完成了, 但是服务我们还没有进行启动, 添加入口文件: `index.ts`
+
+```ts
+import express from "express";
+import chalk from "chalk";
+import bodyParser from "body-parser";
+
+import { port } from "./config";
+import MovieRouter from "./routes/movies";
+
+const app = express();
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use("/movies", MovieRouter);
+
+app.listen(port, () => {
+  console.log(chalk.blue.bold(`server on running at http://localhost:${port}`));
+});
+```
+
+> 最后在终端中开启服务之后,就可以使用下方命令进行测试啦
+
+```bash
+npm run start
+```
+
 查询列表执行
 
 ```bash
@@ -161,7 +187,7 @@ curl -X DELETE --data "id=101" http://localhost:4000/movies/104
 
 > 到此处我们已经将电影的基础增删改查已经开发完了, 可以利用其他如 `postman` 或 `postwomen`进行测试,
 
-[完整代码](https://github.com/niexiaofei1988/learning/tree/master/examples/express/movies)
+[完整代码](https://github.com/niexiaofei1988/learning/tree/master/examples/express/restful)
 
 ### 参考
 
