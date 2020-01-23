@@ -7,8 +7,8 @@
 ```bash
 mkdir movies & cd movies
 npm init -y
-npm install -S express body-parser multer
-npm install -D nodemon chalk ts-node
+npm install -S express body-parser
+npm install -D nodemon chalk ts-node typescript
 ```
 
 > 修改 `package.json`

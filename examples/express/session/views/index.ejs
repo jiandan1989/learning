@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <title><%=title %></title>
+  <style>
+    body {
+      height: 100vh;
+      display: flex;
+      color: #f47d31;
+      font-weight: 500;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #8E2DE2;
+      background: -webkit-linear-gradient(to right, #4A00E0, #8E2DE2);
+      background: linear-gradient(to right, #4A00E0, #8E2DE2);
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="alert alert-primary" role="alert">
+    用户名: <%=sessionInfo.userName %>
+  </div>
+  <div class="alert alert-danger" role="alert">
+    session时长剩余: <span id="countdown"><%=sessionInfo.max %></span>秒
+  </div>
+  <br />
+  <div>
+    <button type="button" class="btn btn-primary" id="logout">退出</button>
+    <button type="button" class="btn btn-primary" id="test_session">测试 session</button>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    async function logout() {
+      const result = await axios.post('/login/logout');
+      if (result && result.data && result.data.success) {
+        window.location.href = '/';
+      }
+    }
+
+    async function testSessionHandler() {
+      const result = await axios.post('/test/seesion');
+      if (result && result.data && result.data.success) {
+        alert(result.data.msg);
+
+        // 超时重新登录
+        if (result.data.code === 'timeout') {
+          window.location.href = '/login';
+        }
+      }
+    }
+    const countdown = setInterval(() => {
+      if ($('#countdown').html() <= 0) {
+        clearInterval(countdown);
+        countdown = null;
+      }
+      $('#countdown').html($('#countdown').html() - 1)
+    }, 1000);
+
+
+    axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+    const signOutBtn = $('#logout');
+    signOutBtn.on('click', logout);
+
+    const testSessionBtn = $('#test_session');
+    testSessionBtn.on('click', testSessionHandler);
+
+  </script>
+</body>
+
+</html>
