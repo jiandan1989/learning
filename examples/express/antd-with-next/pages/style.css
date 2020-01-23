@@ -1,0 +1,19 @@
+body,
+.full_wrapper,
+#__next {
+  height: 100vh;
+}
+
+.full_wrapper {
+  display: flex;
+  padding: 24px;
+  justify-content: center;
+  align-items: center;
+  background: #ff00cc;
+  background: -webkit-linear-gradient(to right, #333399, #ff00cc); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #333399,
+    #ff00cc
+  );
+}
