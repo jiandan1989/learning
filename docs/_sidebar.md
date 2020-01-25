@@ -45,7 +45,8 @@
   - [Github Page](Other/github/page "使用Github Page 搭建自己的静态站点")
   - [Mac Tree](Other/tree "Tree 生成项目目录")
 
-- 图表可视化
+- 数据结构
+  - [栈](dataStructure/Stack/)
 
   <!-- - [基础知识](Charts/Basic "基础知识") -->
   <!-- - [D3](Charts/d3 "D3") -->
