@@ -47,6 +47,7 @@
 
 - 数据结构
   - [栈](dataStructure/Stack/)
+  - [队列](dataStructure/Queue/)
 
   <!-- - [基础知识](Charts/Basic "基础知识") -->
   <!-- - [D3](Charts/d3 "D3") -->

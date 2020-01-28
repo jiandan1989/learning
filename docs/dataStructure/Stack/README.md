@@ -10,11 +10,11 @@
 
 - ES5 `Function`
 
-[](es5Functin.ts " :include :type=code")
+[](es5Functin.ts ' :include :type=code')
 
 - `class`
 
-[](class.js " :include :type=code")
+[](class.js ' :include :type=code')
 
 > 然后需要了解下实现一个栈的哪些功能, 因为这里使用的是 `JS` 数组的内置方法, 所以所以是比较简单的
 
@@ -31,9 +31,45 @@
 
 #### 进制转换
 
+> 如何使用栈实现进制转换呢, 虽然内置的方法 [toString](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Number/toString) 是可以实现的, 接收一个`2-36`的基数值,返回的就是对应的进制数, 比如以下代码中所示, 但这里需要了解的是使用栈实现
+
+```ts
+const number = 10;
+number.toString(2); // 1010
+number.toString(8); // 12
+```
+
+`栈实现进制转换`基于 2 进制
+
+[](numberToBinary.ts ' :include :type=code')
+
+> 这里需要再接受一个参数 表示为基数
+
+[](numberToBase.ts ' :include :type=code')
+
 #### 回文
 
-#### 递归演示
+> 什么是回文, 就是如 `dad` `A man, a plan, a canal: Panama` 前后都一致的表示为回文, 不包含特殊字符, 有很多种实现字符串翻转的方法, 也是一道初级算法题, 具体性能没有仔细测过, 不过这种方式可能并不是很好
+
+[](isPalindrome.js ' :include :type=code')
+
+### 函数栈
+
+> 函数相互调用时内也会形成一种内存栈, 比如有两个方法`fn1, fn2` `fn2`中调用了 `fn1`时
+
+```ts
+function fn1() {
+  console.log('fn1已经调用');
+}
+
+function fn2() {
+  fn1();
+  console.log('fn2调用');
+}
+fn2();
+```
+
+> 按照栈的方式理解的话就是, 在 `fn2`调用时先入栈, 由于`js`的调用顺序是从上到下执行的, 这里调用了 `fn1`所以此时又将 `fn1`入栈, 当只有 `fn1`调用完成之后才会弹出, 所以最后调用执行的顺序就是 `fn2 --> fn1 --> fn2执行完成`
 
 ### 视频
 
@@ -45,3 +81,7 @@
 - [Understanding Javascript Function Executions — Call Stack, Event Loop , Tasks & more](https://medium.com/@gaurav.pandvia/understanding-javascript-function-executions-tasks-event-loop-call-stack-more-part-1-5683dea1f5ec)
 - [Understanding the JavaScript call stack](https://www.freecodecamp.org/news/understanding-the-javascript-call-stack-861e41ae61d4/)
 - [How do you implement a Stack and a Queue in JavaScript?](https://stackoverflow.com/questions/1590247/how-do-you-implement-a-stack-and-a-queue-in-javascript)
+
+<!-- ### 其他练习
+
+- 现实生活中栈的一个例子是佩兹糖果盒。想象一下你有一盒佩兹糖果，里面塞满了红 色、黄色和白色的糖果，但是你不喜欢黄色的糖果。使用栈(有可能用到多个栈)写一 段程序，在不改变盒内其他糖果叠放顺序的基础上，将黄色糖果移出。 -->
