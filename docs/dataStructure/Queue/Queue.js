@@ -1,6 +1,4 @@
-/**
- * es5
- */
+// es5
 function Queue() {
   let items = [];
 
@@ -33,11 +31,14 @@ function Queue() {
   this.isEmpty = function() {
     return items.length === 0;
   };
+
+  // 查看所有元素
+  this.getItems = function() {
+    return items;
+  };
 }
 
-/**
- * class
- */
+// class
 class Queue {
   constructor() {
     this.items = [];
@@ -71,5 +72,10 @@ class Queue {
   // 查看队列是否为空
   isEmpty() {
     return this.size() === 0;
+  }
+
+  // 查看所有元素列表
+  getItems() {
+    return this.items;
   }
 }
