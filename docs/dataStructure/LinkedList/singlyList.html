@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>单向链表</title>
+</head>
+
+<body>
+  <script src="./SinglyList.js"></script>
+  <script>
+    const singlyList = new SinglyList();
+    singlyList.append(1);
+    singlyList.append(2);
+    singlyList.insert(0, 3);
+    singlyList.insert(1, 5);
+
+    const singlyListHtml = [];
+    singlyListHtml.push(`最初节点 size: ${singlyList.size()}, 总链表:
+        <pre>${JSON.stringify(singlyList.getHead(), null, 2)}</pre>`);
+    singlyListHtml.push(`删除 singlyList.remove(2):
+        <pre>${JSON.stringify(singlyList.remove(2), null, 2)}</pre>`);
+    singlyListHtml.push(`最后一个节点 singlyList.lastNode():
+        <pre>${JSON.stringify(singlyList.lastNode(), null, 2)}</pre>`);
+    singlyList.removeAt(2);
+    singlyListHtml.push(`查找节点位置 indexOf:
+        <pre>${singlyList.indexOf(2)}</pre>`);
+    singlyListHtml.push(`链表长度:
+        <pre>${singlyList.size()}</pre>`);
+    singlyListHtml.push(`链表剩余节点:
+        <pre>${JSON.stringify(singlyList.getHead(), null, 2)}</pre>`);
+    document.body.innerHTML = singlyListHtml.join('');
+  </script>
+</body>
+
+</html>

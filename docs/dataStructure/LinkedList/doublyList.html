@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>双向链表</title>
+</head>
+
+<body>
+  <script src="./DoublyList.js"></script>
+  <script>
+    const doublyList = new DoublyList();
+    doublyList.append(3);
+    doublyList.append(1);
+    doublyList.append(2);
+    doublyList.insert(2, 4);
+    doublyList.insert(1, 5);
+
+    // 35142
+
+    const doublyListHtml = [];
+
+    function getAllNode() {
+      const result = [];
+      if (!doublyList.isEmpty()) {
+        let current = doublyList.getHead();
+        while (current.next) {
+          result.push(current.element);
+          current = current.next;
+        }
+        result.push(doublyList.lastNode().element);
+      }
+
+      return result;
+    }
+
+    doublyListHtml.push(`最初节点长度: ${doublyList.size()}<br />`);
+    doublyListHtml.push(`插入元素的顺序: ${getAllNode().join(' --> ')}<br />`);
+    doublyListHtml.push(`最后一个节点元素: ${doublyList.lastNode().element}`);
+    document.body.innerHTML = doublyListHtml.join('');
+  </script>
+</body>
+
+</html>

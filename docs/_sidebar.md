@@ -45,9 +45,10 @@
   - [Github Page](Other/github/page "使用Github Page 搭建自己的静态站点")
   - [Mac Tree](Other/tree "Tree 生成项目目录")
 
-- 数据结构
+- [数据结构](dataStructure/index.html)
   - [栈](dataStructure/Stack/)
   - [队列](dataStructure/Queue/)
+  - [链表](dataStructure/LinkedList/)
 
   <!-- - [基础知识](Charts/Basic "基础知识") -->
   <!-- - [D3](Charts/d3 "D3") -->

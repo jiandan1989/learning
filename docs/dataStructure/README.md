@@ -13,3 +13,6 @@
 ### 参考资源
 
 - [数据结构 - 维基百科](https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84)
+
+
+<!-- class 方法使用 get 和不使用 get 的区别 -->
