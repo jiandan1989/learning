@@ -49,6 +49,7 @@
   - [栈](dataStructure/Stack/)
   - [队列](dataStructure/Queue/)
   - [链表](dataStructure/LinkedList/)
+  - [集合](dataStructure/Set/)
 
   <!-- - [基础知识](Charts/Basic "基础知识") -->
   <!-- - [D3](Charts/d3 "D3") -->
