@@ -50,6 +50,13 @@
   - [队列](dataStructure/Queue/)
   - [链表](dataStructure/LinkedList/)
   - [集合](dataStructure/Set/)
+  - [字典](dataStructure/Dictionary/)
+  - [散列表](dataStructure/HashTable/)
+
+- [设计模式](DesignPatterns/)
+  - [创建型](DesignPatterns/Creational/)
+  - [结构型](DesignPatterns/Structural/)
+  - [行为型](DesignPatterns/Behavioral/)
 
   <!-- - [基础知识](Charts/Basic "基础知识") -->
   <!-- - [D3](Charts/d3 "D3") -->

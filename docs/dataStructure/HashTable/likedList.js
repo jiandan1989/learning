@@ -1,11 +1,11 @@
-class Node {
+class LikedNode {
   constructor(element) {
     this.element = element;
     this.next = null;
   }
 }
 
-class SinglyList {
+class LikedList {
   constructor() {
     this.head = null;
     this.length = 0;
@@ -13,16 +13,23 @@ class SinglyList {
 
   /** 尾部添加节点 */
   append(element) {
-    const node = new Node(element);
+    const node = new LikedNode(element);
+    let current = this.head;
     /** 如果没有节点, 直接添加 */
     if (!this.head) {
       this.head = node;
     } else {
-      const current = this.lastNode();
+      /** 如果已经存在节点, 遍历查找最后一个节点 */
+      while (current.next) {
+        current = current.next;
+      }
+
+      /** 循环结束后, current 就是最后的一个节点了 */
       current.next = node;
     }
 
     this.length++;
+    return this;
   }
 
   /** 任意位置添加节点 */
@@ -30,7 +37,7 @@ class SinglyList {
     if (position < 0 || position >= this.length) {
       throw new Error("错误");
     }
-    const node = new Node(element);
+    const node = new LikedNode(element);
     let index = 0;
     let current = this.head;
     /** 如果 position 为 0 直接添加 */
@@ -96,11 +103,11 @@ class SinglyList {
       let index = 0;
       let current = this.head;
       while (current.next) {
+        current = current.next;
+        index++;
         if (current.element === element) {
           return index;
         }
-        current = current.next;
-        index++;
       }
     }
 
