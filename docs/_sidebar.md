@@ -52,6 +52,7 @@
   - [集合](dataStructure/Set/)
   - [字典](dataStructure/Dictionary/)
   - [散列表](dataStructure/HashTable/)
+  - [树结构](dataStructure/tree/)
 
 - [设计模式](DesignPatterns/)
   - [创建型](DesignPatterns/Creational/)

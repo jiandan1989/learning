@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>树结构</title>
+</head>
+
+<body>
+
+  <script src="./binarySearchTree.js"></script>
+  <script>
+    const bsTree = new BSTree();
+    // bsTree.insert(8).insert(10).insert(12).insert(12);
+    bsTree.insert(2).insert(100);
+    bsTree.insert(3);
+    bsTree.insert(9);
+    const pre = document.createElement('pre');
+    pre.innerHTML = JSON.stringify(bsTree.getTree(), null, 2);
+    // console.log(bsTree.remove(9));
+    document.body.appendChild(pre)
+  </script>
+</body>
+
+</html>

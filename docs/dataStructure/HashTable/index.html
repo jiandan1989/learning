@@ -1,14 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>散列表</title>
 </head>
+
 <body>
+  <script src="./hashNode.js"></script>
+  <script src="./loseloseHashCode.js"></script>
   <script src="./base.js"></script>
   <script src="./likedList.js"></script>
   <script src="./linearHashTable.js"></script>
+  <script src="./hashTableX.js"></script>
+
+  <script>
+    console.log("%c基础实现HashTable Start >>>>", "color: red; font-weight: 600");
+    const baseHt = new BaseHashTable();
+    baseHt.put("abc", 1).put("a", "123");
+
+    console.log(baseHt.get("abc"));
+    console.log("%c基础实现HashTable End >>>>", "color: red; font-weight: 600");
+
+
+    console.log("%c分离链接解决冲突", "color: yellow");
+
+    const linearHashTable = new LinearHashTable();
+
+    linearHashTable.put("Donnie", "你好").put("Ana", "世界");
+    console.log(linearHashTable.get("Donnie"));
+
+
+    console.log("%c 线性探查", "color: yellow");
+    const hashTableX = new HashTableX();
+
+    hashTableX.put("name", "nihao");
+
+    console.log(hashTableX.remove("price"));
+
+  </script>
 </body>
+
 </html>

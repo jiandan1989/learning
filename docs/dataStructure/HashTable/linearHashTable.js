@@ -1,13 +1,3 @@
-/**
- * 需要同时保存 key 和 value 借助于 Node 辅助类
- */
-class Node {
-  constructor(key, value) {
-    this.key = key;
-    this.value = value;
-  }
-}
-
 /** 设置私有变量的一种方式 */
 const _items = Symbol("LinearHashTable");
 
@@ -16,19 +6,10 @@ class LinearHashTable {
     this[_items] = [];
   }
 
-  /** 转化 hash code */
-  loseloseHashCode(key) {
-    let hash = 0;
-    for (let index = 0; index < key.length; index++) {
-      hash += key[index].charCodeAt();
-    }
-    return hash % 37;
-  }
-
   /** 添加 */
   put(key, value) {
-    const pos = this.loseloseHashCode(key);
-    const node = new Node(key, value);
+    const pos = loseloseHashCode(key);
+    const node = new HashNode(key, value);
 
     if (!this[_items][pos]) {
       const list = new LikedList();
@@ -43,7 +24,7 @@ class LinearHashTable {
 
   /** 获取指定 key */
   get(key) {
-    const pos = this.loseloseHashCode(key);
+    const pos = loseloseHashCode(key);
     if (this[_items][pos]) {
       let current = this[_items][pos].getHead();
       while (current.next) {
@@ -64,7 +45,7 @@ class LinearHashTable {
 
   /** 删除 */
   remove(key) {
-    const pos = this.loseloseHashCode(key);
+    const pos = loseloseHashCode(key);
     if (this[_items][pos]) {
       const list = this[_items][pos];
       let current = this[_items][pos].getHead();
@@ -94,10 +75,3 @@ class LinearHashTable {
     return this[_items];
   }
 }
-
-console.log("%c分离链接解决冲突", "color: yellow");
-
-const linearHashTable = new LinearHashTable();
-
-linearHashTable.put("Donnie", "你好").put("Ana", "世界");
-console.log(linearHashTable.get("Donnie"));
