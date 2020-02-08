@@ -8,9 +8,19 @@ class BSTreeNode {
 }
 
 const _root = Symbol("BSTreeRoot");
+const _findRightOnRightMin = Symbol("_findRightOnRightMin");
 class BSTree {
   constructor() {
     this[_root] = null;
+    /** 查找当前节点的右侧最大节点 */
+    this[_findRightOnRightMin] = function(node) {
+      if (node === null) return null;
+      let current = node;
+      while (current.right) {
+        current = current.right;
+      }
+      return current;
+    };
   }
 
   /** 递归遍历 插入节点 */
@@ -98,35 +108,38 @@ class BSTree {
 
   /** 删除指定节点 */
   remove(value) {
-    if (this[_root] === null) {
-      console.log("当前树为空, 不能进行删除!");
-      return false;
-    }
-
-    return this.removeNode(this[_root], value);
+    this[_root] = this.removeNode(this[_root], value);
+    return this;
   }
 
-  removeNode(oldNode, value) {
-    if (oldNode.value === value) {
-      if (oldNode.left === null && oldNode.right === null) {
-        oldNode = null;
-        return true;
+  removeNode(node, value) {
+    /** 如果节点为空 直接返回 */
+    if (node === null) return null;
+
+    /** 递归调用查找节点 */
+    if (node.value > value) {
+      node.left = this.removeNode(node.left, value);
+      return node;
+    } else if (node.value < value) {
+      node.right = this.removeNode(node.right, value);
+    } else {
+      // 此处打印可以查看已经查找到需要删除的对应节点
+      console.log(node, '>>>>>>>>>>>>');
+
+      if (node.left === null && node.right === null) {
+        // 叶子节点
+        node = null;
+        return node;
+      } else if (node.left === null && node.right) {
+        return node.right;
+      } else if (node.left && node.right === null) {
+        return node.left;
+      } else {
+        // 最后是包含两个子节点
+        const aux = this[_findRightOnRightMin](node.right); // 查找右侧最小节点
+        node.value = aux.value; // 覆盖 删除
+        return node;
       }
-
-      // let dir;
-      // if (oldNode.left === null && oldNode.right !== null) {
-      //   dir = "left";
-      // } else if (oldNode.right === null && oldNode.left !== null) {
-      //   dir = "right";
-      // }
-
-      console.log(dir);
-    } else if (oldNode.value > value) {
-      console.log('左侧');
-      return this.removeNode(oldNode.left, value);
-    } else if (oldNode.value < value) {
-      console.log("右侧");
-      return this.removeNode(oldNode.right, value);
     }
   }
 

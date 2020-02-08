@@ -13,13 +13,13 @@
   <script src="./binarySearchTree.js"></script>
   <script>
     const bsTree = new BSTree();
-    // bsTree.insert(8).insert(10).insert(12).insert(12);
-    bsTree.insert(2).insert(100);
-    bsTree.insert(3);
-    bsTree.insert(9);
+    bsTree.insert(11).insert(8).insert(4).insert(9).insert(3).insert(5).insert(10);
     const pre = document.createElement('pre');
+
+    console.log(bsTree.getTree())
+
+    bsTree.remove(8).remove(11).remove(3).remove(4).remove(5).remove(9);
     pre.innerHTML = JSON.stringify(bsTree.getTree(), null, 2);
-    // console.log(bsTree.remove(9));
     document.body.appendChild(pre)
   </script>
 </body>

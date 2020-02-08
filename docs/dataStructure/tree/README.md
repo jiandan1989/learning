@@ -202,14 +202,79 @@ findMax() {
 > 然后接下来就是对节点进行删除了, 删除的话相比较以上的功能就比较麻烦了, 需要考虑的地方比较多
 
 - 如果树为空, 直接`return`
-- 无论当前节点值大于删除值时或者小于节点值时, 都需要查看下有没有子节点
-  - 没有左右子节点时, 可以直接进行删除
-  - 只有一个节点时, 判断当前删除节点的 `左 | 右`节点值和当前节点上一个节点的值进行判断, 大于则放上一个节点的右侧, 小于则放上一个节点左侧
-  - 有两个子节点时
+- 删除叶子节点
+- 删除只有一个子节点
+- 删除有两个子节点
 
-> 根据设定的逻辑进行编写
+> 主要逻辑就是在查找的过程中一步一步的进行重构树, 且在查找到对应的节点时 直接设置为空`null`
 
-<!-- [完整代码](binarySearchTree.js) -->
+`以下代码实现有Bug`
+
+```js
+constructor() {
+  this[_root] = null;
+  /** 查找当前节点的右侧最小节点 */
+  this[_findRightOnRightMin] = function(node) {
+    if (node === null) return null;
+    let current = node;
+    while (current.right) {
+      current = current.right;
+    }
+    return current;
+  };
+}
+
+/** 删除指定节点 */
+remove(value) {
+  // 重构树
+  this[_root] = this.removeNode(this[_root], value);
+}
+
+removeNode(node, value) {
+  /** 如果当前节点为空 直接返回 */
+  if (node === null) return null;
+  /**
+   * 1. 判断是否为空, 为空直接返回
+   * 2. 判断是否当前节点小于删除节点值, 小于则递归遍历 右侧节点, 大于则递归遍历左侧节点
+   * 3. 查找到对应的节点
+   *  (1). 如果删除对应节点为叶子节点时, 直接删除即可
+   *  (2). 如果删除对应节点包含一个子节点时, 如果是右节点 则设置当前节点为右节点, 如果是左节点, 则设置当前节点为左节点
+   *  (3). 如果删除节点包含两个子节点时, 则查找删除节点的右侧最小节点 todo 这里还不是很明白为什么是右侧最小节点, 需要借助图分析
+   *
+   * 当包含一个节点时, 递归压入调用栈, 直到查找到对应的节点时 递归调用结束, 到最后一个判断内(查找到删除对应的节点位置)
+  */
+  if (node.value < value) {
+    node.right = this.removeNode(node.right, value);
+    return node;
+  } else if (node.value > value) {
+    node.left = this.removeNode(node.left, value);
+    return node;
+  } else {
+    if (node.left === null && node.right === null) {
+      /** 叶子节点 */
+      node = null;
+      return node;
+    } else if (node.left === null && node.right) {
+      /** 只有右节点 */
+      return node.right;
+    } else if (node.right === null && node.left) {
+      /** 只有左节点 */
+      return node.left;
+    } else {
+      /** 包含有左右两个节点 */
+      // todo 此处为什么是查找当前节点右侧最小节点 ? 待学习
+      const aux = this[_findRightOnRightMin](node.right);
+      node.value = aux.value;
+      return node;
+    }
+  }
+}
+```
+
+> 最后一个就是遍历, 当业务中需要进行对树进行操作时, 需要提供一个可接受`callback`的遍历方法 `todo`
+
+
+[完整代码](https://github.com/niexiaofei1988/learning/blob/master/docs/dataStructure/tree/binarySearchTree.js)
 
 ### 参考
 
