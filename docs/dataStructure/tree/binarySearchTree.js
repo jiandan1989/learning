@@ -112,6 +112,7 @@ class BSTree {
     return this;
   }
 
+  // 删除有bug
   removeNode(node, value) {
     /** 如果节点为空 直接返回 */
     if (node === null) return null;
@@ -119,12 +120,13 @@ class BSTree {
     /** 递归调用查找节点 */
     if (node.value > value) {
       node.left = this.removeNode(node.left, value);
-      return node;
+      return node; // 需要重新构建, 将重新构建的返回
     } else if (node.value < value) {
       node.right = this.removeNode(node.right, value);
+      return node;
     } else {
       // 此处打印可以查看已经查找到需要删除的对应节点
-      console.log(node, '>>>>>>>>>>>>');
+      console.log(node, ">>>>>>>>>>>>");
 
       if (node.left === null && node.right === null) {
         // 叶子节点
